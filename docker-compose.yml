@@ -1,0 +1,23 @@
+##############################################################
+# LNAMP 开发环境
+# 应用：Nginx、Apache、PHP、MySQL
+##############################################################
+
+version: '3'
+services:
+
+  # Nginx
+  web:
+    build:
+      context: ./build/nginx
+      args:
+        VERSION_TAG: 1.12
+    image: lnmpa/nginx:1.12
+    volumes:
+      - ./www:/usr/share/nginx/html:rw
+      - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      #- ./conf/nginx/vhosts:/etc/nginx/conf.d:rw
+      - ./log/nginx:/var/log/nginx:rw
+    ports:
+      - "8888:80"
+
