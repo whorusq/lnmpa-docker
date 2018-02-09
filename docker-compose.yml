@@ -19,5 +19,5 @@ services:
       #- ./conf/nginx/vhosts:/etc/nginx/conf.d:rw
       - ./log/nginx:/var/log/nginx:rw
     ports:
-      - "8888:80"
+      - "80:80"
 
