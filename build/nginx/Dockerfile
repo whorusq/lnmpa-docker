@@ -6,5 +6,5 @@
 ARG VERSION_TAG
 FROM nginx:$VERSION_TAG
 
-MAINTAINER whoru.S.Q <whoru.sun@gmail.com>
+MAINTAINER whoru.S.Q <whorusq@gmail.com>
 

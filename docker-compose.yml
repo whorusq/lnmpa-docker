@@ -16,8 +16,53 @@ services:
     volumes:
       - ./www:/usr/share/nginx/html:rw
       - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      #- ./conf/nginx/vhosts:/etc/nginx/conf.d:rw
+      - ./conf/nginx/vhosts:/etc/nginx/conf.d:rw
       - ./log/nginx:/var/log/nginx:rw
+    depends_on:
+      - php_apache
     ports:
-      - "8888:80"
+      - "80:80"
+    links:
+      - php_apache
 
+  # PHP 7.0 and Apache
+  php_apache:
+    build:
+      context: ./build/php_apache
+      args:
+        - TAG=7.0
+        - READIS=3.1.4
+    image: lnmpa/php_apache:7.0_2.4
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    environment:
+      TZ: "Asia/Shanghai"
+    volumes:
+      - ./www:/var/www/html:rw
+      - ./conf/php/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./conf/apache/apache2.conf:/etc/apache2/apache2.conf:ro
+      - ./conf/apache/ports.conf:/etc/apache2/ports.conf:ro
+      - ./conf/apache/sites-available:/etc/apache2/sites-available:rw
+      - ./conf/apache/sites-enabled:/etc/apache2/sites-enabled:rw
+    links:
+      - mysql
+
+  # MySQL 5.7
+  mysql:
+    build:
+      context: ./build/mysql
+      args:
+        - TAG=5.7
+    image: lnmpa/mysql:5.7
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      TZ: "Asia/Shanghai"
+    volumes:
+      - ./data:/var/lib/mysql:rw
+      - ./log/mysql/:/var/log/mysql/:rw
