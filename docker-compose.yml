@@ -7,25 +7,28 @@ version: '3'
 services:
 
   # Nginx
-  web:
+  nginx:
     build:
       context: ./build/nginx
       args:
         VERSION_TAG: 1.12
     image: lnmpa/nginx:1.12
+    restart: always
+    depends_on:
+      - php_apache
+    ports:
+      - "80:80"
+    environment:
+      TZ: "Asia/Shanghai"
     volumes:
       - ./www:/usr/share/nginx/html:rw
       - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./conf/nginx/vhosts:/etc/nginx/conf.d:rw
       - ./log/nginx:/var/log/nginx:rw
-    depends_on:
-      - php_apache
-    ports:
-      - "80:80"
     links:
       - php_apache
 
-  # PHP 7.0 and Apache
+  # PHP 7.0 with Apache
   php_apache:
     build:
       context: ./build/php_apache
