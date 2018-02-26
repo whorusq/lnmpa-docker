@@ -10,36 +10,36 @@
 ```
 .
 ├── README.md
-├── build   <---------- 各服务 Dockerfile 文件
+├── build   				 	<---------- 各服务 Dockerfile 文件
 │   ├── mysql
 │   │   └── Dockerfile
 │   ├── nginx
 │   │   └── Dockerfile
 │   └── php_apache
 │       ├── Dockerfile
-│       └── source.list  <---------- 阿里云软件更新源
+│       └── source.list      	<---------- 阿里云软件更新源
 ├── conf
 │   ├── apache
-│   │   ├── apache2.conf  <---------- Apache 服务配置
-│   │   ├── ports.conf  <---------- 端口号配置
-│   │   ├── sites-available  <---------- Apache 站点配置
+│   │   ├── apache2.conf     	<---------- Apache 服务配置
+│   │   ├── ports.conf       	<---------- 监听端口配置
+│   │   ├── sites-available  	<---------- Apache 站点配置目录
 │   │   │   └── www.conf
-│   │   └── sites-enabled  <---------- 映射 ../sites-available/xx.conf
+│   │   └── sites-enabled    	<---------- 映射站点配置
 │   │       ├── README.md
-│   │       └── www.conf  -> ../sites-available/www
-│   ├── mysql  <---------- MySQL 自定义配置
+│   │       └── www.conf -> ../sites-available/www.conf
+│   ├── mysql                	<---------- MySQL 自定义配置目录
 │   │   └── mysql.env
 │   ├── nginx
-│   │   ├── nginx.conf  <---------- Nginx 服务配置
-│   │   └── vhosts <---------- Nginx 站点配置
+│   │   ├── nginx.conf       	<---------- Nginx 服务配置
+│   │   └── vhosts           	<---------- Nginx 站点配置目录
 │   │       ├── README.md
 │   │       └── www.conf
-│   └── php  <---------- PHP 自定义配置
+│   └── php                  	<---------- PHP 自定义配置目录
 │       └── php.ini
-├── data  <---------- MySQL 数据文件，初始化后自动生成改目录
-├── docker-compose.yml  <---------- ❗️❗️❗️Docker compose 配置文件，可根据需要修改软件版本、映射目录等
-├── log  <---------- 日志文件，当产生日志时自动生成
-└── www -> /Users/user1/www  <---------- 映射本地 www 根目录
+├── data                     	<---------- MySQL 数据文件目录，初始化启动后自动生成
+├── docker-compose.yml       	<---------- ❗️❗️❗️Docker compose 配置文件，可根据需要修改软件版本、映射目录等
+├── log                      	<---------- 日志文件目录，当产生日志时自动生成
+└── www -> /Users/user1/www  	<---------- 映射本地 www 根目录
 ```
 
 ### 2. 使用
