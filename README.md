@@ -44,38 +44,49 @@
 
 ### 2. 使用
 
-- 克隆或下载源码
+2.1. 克隆或下载源码
 
-	```bash
-	➜  git clone https://github.com/whorusq/docker-lnmpa.git lnmpa
-	```
+```bash
+➜  git clone https://github.com/whorusq/docker-lnmpa.git lnmpa
+```
 
-- 替换 www 目录
+2.2. 替换 www 目录
 
-	```bash
-	➜  cd lnmpa
-	➜  mv www www_bak
-	➜  ln -s /home/user1/www www
-	```
+```bash
+➜  cd lnmpa
+➜  mv www www_bak
+➜  ln -s /home/user1/www www
+```
 
-- 初始化启动
+2.3. 初始化启动
 
-	```bash
-	# 此过程将初始化 php_apache、mysql、nginx，并前台启动服务
-	➜  docker-compose up
-	```
+```bash
+# 此过程将初始化 php_apache、mysql、nginx，并前台启动服务
+➜  docker-compose up
+```
 
-	> 如果整个过程出现 error ，初始化将终止，可针对错误信息进行调整。
-	>
-	> 正常启动后，目录下将生成
-	>
-	> - ./data MySQL 数据文件
-	> - ./log 所有日志文件
+> 如果整个过程出现 error ，初始化将终止，可针对错误信息进行调整。
+>
+> 正常启动后，目录下将生成
+>
+> - ./data MySQL 数据文件
+> - ./log 所有日志文件
 
-	```bash
-	# 后台启动
-	➜  docker-compose up -d
+其它常用操作命令：
 
-	# 停止服务
-	➜  docker-compose stop
-	```
+```bash
+# 后台启动
+➜  docker-compose up -d
+
+# 停止服务
+➜  docker-compose stop
+
+# 完全移除容器
+➜  docker-compose down
+
+# 查看启动的容器情况
+➜  docker-compose ps
+
+# 查看容器输出日志
+➜  docker logs $container_name
+```
